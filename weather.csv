@@ -1,2 +1,5 @@
 "date","city","conditions","temp_f","feels_like_f","high_f","low_f","precip_chance_pct","max_wind_mph","humidity_pct","sunrise","sunset"
 "2026-09-27","Ashwaubenon, WI","Fog",61,59,69,44,2,4,73,"06:45","18:40"
+"2026-09-27","Appleton, WI","Fog",63,60,70,44,2,4,53,"06:46","18:41"
+"2026-09-27","Chicago, IL","Overcast",60,57,69,52,0,9,64,"06:43","18:38"
+"2026-09-27","Denver, CO","Light drizzle",81,70,85,54,10,15,20,"06:52","18:48"
