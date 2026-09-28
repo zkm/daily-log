@@ -1,0 +1,30 @@
+# Backup for the local 6 AM timer: logs the weather if it hasn't been logged yet today.
+name: Backup weather log
+
+on:
+  schedule:
+    # 16:00 and 23:00 UTC = 11 AM / 6 PM Central (10 AM / 5 PM after DST ends). Both stay on the same Central day.
+    - cron: "0 16 * * *"
+    - cron: "0 23 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Log even if today is already logged"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  log:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Log weather
+        env:
+          FORCE: ${{ inputs.force && '1' || '' }}
+        run: |
+          git config user.name "Zach Schneider"
+          git config user.email me@zachschneider.com
+          ./daily-commit.sh
