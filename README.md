@@ -12,3 +12,6 @@ Raw data is in [`weather.csv`](weather.csv).
 | 2026-09-28 | Appleton, WI | Mostly clear | 54°F (feels 53°) | 74° / 53° | 1% | 5 mph | 91% | 06:48 / 18:39 |
 | 2026-09-28 | Chicago, IL | Partly cloudy | 50°F (feels 47°) | 68° / 49° | 1% | 7 mph | 89% | 06:44 / 18:37 |
 | 2026-09-28 | Denver, CO | Heavy drizzle | 59°F (feels 56°) | 79° / 57° | 26% | 15 mph | 56% | 06:53 / 18:46 |
+| 2026-09-29 | Appleton, WI | Overcast | 51°F (feels 48°) | 73° / 51° | 48% | 10 mph | 85% | 06:49 / 18:37 |
+| 2026-09-29 | Chicago, IL | Fog | 53°F (feels 53°) | 73° / 51° | 2% | 8 mph | 100% | 06:45 / 18:35 |
+| 2026-09-29 | Denver, CO | Overcast | 58°F (feels 56°) | 71° / 56° | 12% | 8 mph | 68% | 06:54 / 18:45 |
