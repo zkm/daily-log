@@ -18,3 +18,6 @@ Raw data is in [`weather.csv`](weather.csv).
 | 2026-09-30 | Appleton, WI | Light rain | 61°F (feels 60°) | 69° / 61° | 70% | 10 mph | 84% | 06:50 / 18:36 |
 | 2026-09-30 | Chicago, IL | Rain | 61°F (feels 60°) | 66° / 60° | 99% | 10 mph | 78% | 06:46 / 18:33 |
 | 2026-09-30 | Denver, CO | Light drizzle | 53°F (feels 50°) | 71° / 52° | 21% | 16 mph | 69% | 06:55 / 18:43 |
+| 2026-10-01 | Appleton, WI | Light rain | 65°F (feels 67°) | 71° / 53° | 84% | 9 mph | 94% | 06:51 / 18:34 |
+| 2026-10-01 | Chicago, IL | Heavy rain | 63°F (feels 64°) | 74° / 62° | 93% | 13 mph | 92% | 06:47 / 18:31 |
+| 2026-10-01 | Denver, CO | Overcast | 51°F (feels 48°) | 72° / 50° | 8% | 9 mph | 74% | 06:56 / 18:42 |
