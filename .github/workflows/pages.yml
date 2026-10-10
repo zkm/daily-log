@@ -1,0 +1,43 @@
+# Publishes site/ + weather.csv to GitHub Pages on every push to master.
+# Pushes made by the backup workflow use GITHUB_TOKEN, which doesn't trigger `push`
+# workflows, so this also runs when that workflow finishes.
+name: Deploy weather page
+
+on:
+  push:
+    branches: [master]
+  workflow_run:
+    workflows: ["Backup weather log"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+      - name: Build site
+        run: |
+          mkdir _site
+          cp -r site/. _site/
+          cp weather.csv _site/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily Weather Log</title>
+<meta name="description" content="Morning weather for Appleton, Chicago and Denver, logged every day.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌤️</text></svg>">
+<!-- Built from weather.csv by .github/workflows/pages.yml on every push. -->
+<style>
+  :root {
+    --bg: #eaf4ff; --bg2: #fdf6e9; --card: #ffffffcc; --ink: #1d2a3a; --muted: #5b6b7f;
+    --line: #d5e0ec; --sun: #ffb703; --sun-glow: #ffd16688; --cloud: #ffffff; --cloud-edge: #b9c7d8;
+    --dark-cloud: #8a9bb0; --rain: #3a86ff; --snow: #a9c7ff; --bolt: #ffd60a; --fog: #b8c4d2;
+    --c0: #e76f51; --c1: #2a9d8f; --c2: #8338ec; --shadow: 0 10px 30px #1d2a3a1f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0d1626; --bg2: #1a1730; --card: #1a2539cc; --ink: #e8eef7; --muted: #9aabc2;
+      --line: #2b3a52; --cloud: #d8e1ee; --cloud-edge: #7d8da3; --dark-cloud: #5d6d84; --fog: #56657a;
+      --c0: #ff8c6b; --c1: #4fd1c0; --c2: #b28dff; --shadow: 0 10px 30px #0008;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; color: var(--ink); min-height: 100vh;
+    font: 16px/1.5 ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif;
+    background: linear-gradient(160deg, var(--bg), var(--bg2)) fixed;
+    background-color: var(--bg);
+  }
+  main { max-width: 1100px; margin: 0 auto; padding: 24px 16px 64px; }
+  header { text-align: center; padding: 24px 0 8px; position: relative; }
+  header h1 { font-size: clamp(2rem, 6vw, 3.4rem); margin: 0; letter-spacing: -0.02em; }
+  header h1 .wiggle { display: inline-block; animation: wiggle 3s ease-in-out infinite; }
+  header p { color: var(--muted); margin: 4px 0 0; }
+  .stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px 0 8px; }
+  .chip { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-size: .9rem; box-shadow: var(--shadow); backdrop-filter: blur(6px); }
+  .chip b { font-variant-numeric: tabular-nums; }
+  h2 { font-size: 1.3rem; margin: 40px 0 12px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 20px;
+    box-shadow: var(--shadow); backdrop-filter: blur(8px); position: relative; overflow: hidden;
+    transition: transform .25s ease;
+  }
+  .card:hover { transform: translateY(-4px) rotate(-.4deg); }
+  .card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 6px; background: var(--accent); }
+  .card h3 { margin: 0; font-size: 1.15rem; }
+  .card .cond { color: var(--muted); margin: 0; }
+  .card .top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .card .big-icon { width: 120px; height: 120px; flex: none; }
+  .temp { font-size: 3.4rem; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+  .feels { color: var(--muted); font-size: .9rem; }
+  .hilo { display: flex; gap: 14px; margin: 14px 0; font-weight: 700; }
+  .hilo .hi { color: var(--c0); } .hilo .lo { color: var(--rain); }
+  .meters { display: grid; gap: 8px; }
+  .meter { display: grid; grid-template-columns: 22px 76px 1fr 62px; align-items: center; gap: 6px; font-size: .88rem; }
+  .meter .bar { height: 10px; background: var(--line); border-radius: 99px; overflow: hidden; }
+  .meter .fill { height: 100%; border-radius: 99px; transform-origin: left; animation: grow 1.2s cubic-bezier(.2,.9,.3,1.2) both; }
+  @keyframes grow { from { transform: scaleX(0); } }
+  .meter .val { white-space: nowrap; }
+  .meter .val { text-align: right; font-variant-numeric: tabular-nums; }
+  .daylight { margin-top: 14px; }
+  .daylight svg { width: 100%; height: 70px; display: block; }
+  .daylight .times { display: flex; justify-content: space-between; font-size: .8rem; color: var(--muted); }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 20px; box-shadow: var(--shadow); backdrop-filter: blur(8px); }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: .88rem; margin-bottom: 8px; }
+  .legend span::before { content: ""; display: inline-block; width: 14px; height: 4px; border-radius: 2px; background: var(--k); margin-right: 6px; vertical-align: middle; }
+  .chart-scroll { overflow-x: auto; }
+  #chart { width: 100%; min-width: 640px; height: auto; display: block; overflow: visible; }
+  #chart text { fill: var(--muted); font-size: 11px; }
+  #chart .grid { stroke: var(--line); }
+  #chart .dot { transition: r .15s; cursor: pointer; }
+  #chart .dot:hover { r: 6; }
+  .tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--bg); padding: 4px 8px; border-radius: 8px; font-size: .8rem; opacity: 0; transition: opacity .15s; z-index: 10; }
+  .calendar { overflow-x: auto; }
+  .calendar table { border-collapse: separate; border-spacing: 4px; margin: 0 auto; }
+  .calendar th { font-size: .75rem; color: var(--muted); font-weight: 600; white-space: nowrap; }
+  .calendar th.city { text-align: right; padding-right: 8px; }
+  .calendar td { width: 46px; text-align: center; }
+  .calendar td svg { width: 40px; height: 40px; display: block; margin: 0 auto; }
+  .calendar td small { display: block; font-size: .7rem; font-variant-numeric: tabular-nums; }
+  footer { text-align: center; color: var(--muted); font-size: .85rem; margin-top: 48px; }
+  footer a { color: inherit; }
+
+  /* ---------- animated weather icons ---------- */
+  .spin { transform-origin: 50px 50px; animation: spin 18s linear infinite; }
+  .pulse { transform-origin: 50px 50px; animation: pulse 3s ease-in-out infinite; }
+  .drift { animation: drift 6s ease-in-out infinite; }
+  .drift2 { animation: drift 8s ease-in-out infinite reverse; }
+  .drop { animation: fall 1s linear infinite; }
+  .flake { animation: flake 3s linear infinite; }
+  .bolt { animation: flash 2.4s steps(1) infinite; }
+  .fogline { animation: fogmove 5s ease-in-out infinite alternate; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes pulse { 50% { transform: scale(1.08); } }
+  @keyframes drift { 50% { transform: translateX(6px); } }
+  @keyframes fall { from { transform: translateY(-8px); opacity: 0; } 30% { opacity: 1; } to { transform: translateY(16px); opacity: 0; } }
+  @keyframes flake { from { transform: translate(0,-8px) rotate(0); opacity: 0; } 25% { opacity: 1; } to { transform: translate(4px,18px) rotate(180deg); opacity: 0; } }
+  @keyframes flash { 0%, 100% { opacity: 0; } 10%, 16% { opacity: 1; } 13% { opacity: .2; } }
+  @keyframes fogmove { to { transform: translateX(10px); } }
+  @keyframes wiggle { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg) scale(1.1); } }
+  @media (prefers-reduced-motion: reduce) { *, *::before { animation: none !important; transition: none !important; } }
+
+  /* floating background clouds */
+  .sky { position: fixed; inset: 0; pointer-events: none; z-index: -1; overflow: hidden; }
+  .sky div { position: absolute; font-size: 80px; opacity: .18; animation: float linear infinite; }
+  @keyframes float { from { transform: translateX(-20vw); } to { transform: translateX(120vw); } }
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true">
+  <div style="top:8%;animation-duration:70s">☁️</div>
+  <div style="top:35%;animation-duration:95s;animation-delay:-40s;font-size:120px">☁️</div>
+  <div style="top:70%;animation-duration:80s;animation-delay:-20s">☁️</div>
+</div>
+<main>
+  <header>
+    <h1><span class="wiggle">🌦️</span> Daily Weather Log</h1>
+    <p id="subtitle">Loading the sky…</p>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <h2 id="today-title">This morning</h2>
+  <section class="cards" id="cards"></section>
+
+  <h2>🌡️ Highs &amp; lows</h2>
+  <section class="panel">
+    <div class="legend" id="legend"></div>
+    <div class="chart-scroll"><svg id="chart" role="img" aria-label="Daily high and low temperatures by city"></svg></div>
+  </section>
+
+  <h2>🗓️ Every day so far</h2>
+  <section class="panel calendar" id="calendar"></section>
+
+  <footer>
+    Logged every morning at 6:00 AM Central from <a href="https://open-meteo.com/">Open-Meteo</a> ·
+    <a href="weather.csv">raw CSV</a> · <a href="https://github.com/zkm/daily-log">source</a>
+  </footer>
+</main>
+<div class="tip" id="tip"></div>
+
+<script>
+const CITY_COLORS = ["var(--c0)", "var(--c1)", "var(--c2)"];
+
+// Minimal CSV parser (quoted fields may contain commas).
+function parseCSV(text) {
+  const rows = [];
+  for (const line of text.trim().split(/\r?\n/)) {
+    const out = []; let cur = "", q = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (q) { if (ch === '"' && line[i + 1] === '"') { cur += '"'; i++; } else if (ch === '"') q = false; else cur += ch; }
+      else if (ch === '"') q = true;
+      else if (ch === ",") { out.push(cur); cur = ""; }
+      else cur += ch;
+    }
+    out.push(cur); rows.push(out);
+  }
+  const [head, ...body] = rows;
+  return body.map(r => Object.fromEntries(head.map((h, i) => [h, isNaN(r[i]) || r[i] === "" ? r[i] : +r[i]])));
+}
+
+// Map Open-Meteo condition text to an icon kind.
+function kind(cond) {
+  const c = cond.toLowerCase();
+  if (c.includes("thunder")) return "storm";
+  if (c.includes("snow")) return "snow";
+  if (c.includes("freezing")) return c.includes("fog") ? "fog" : "sleet";
+  if (c.includes("rain") || c.includes("shower")) return "rain";
+  if (c.includes("drizzle")) return "drizzle";
+  if (c.includes("fog")) return "fog";
+  if (c === "clear") return "clear";
+  if (c === "mostly clear") return "mostly";
+  if (c === "partly cloudy") return "partly";
+  return "cloudy";
+}
+const EMOJI = { clear: "☀️", mostly: "🌤️", partly: "⛅", cloudy: "☁️", fog: "🌫️", drizzle: "🌦️", rain: "🌧️", sleet: "🌨️", snow: "❄️", storm: "⛈️" };
+
+// Animated SVG icon pieces (viewBox 0 0 100 100).
+const sun = (x = 50, y = 50, r = 18) => `
+  <g class="spin" style="transform-origin:${x}px ${y}px">${Array.from({ length: 8 }, (_, i) =>
+    `<line x1="${x}" y1="${y - r - 6}" x2="${x}" y2="${y - r - 14}" stroke="var(--sun)" stroke-width="5" stroke-linecap="round" transform="rotate(${i * 45} ${x} ${y})"/>`).join("")}</g>
+  <circle cx="${x}" cy="${y}" r="${r + 6}" fill="var(--sun-glow)" class="pulse" style="transform-origin:${x}px ${y}px"/>
+  <circle cx="${x}" cy="${y}" r="${r}" fill="var(--sun)"/>`;
+const cloud = (x = 0, y = 0, s = 1, fill = "var(--cloud)", cls = "drift") => `
+  <g class="${cls}"><g transform="translate(${x} ${y}) scale(${s})">
+    <path d="M25 70 a14 14 0 0 1 2-28 a20 20 0 0 1 38-6 a16 16 0 0 1 12 34 z" fill="${fill}" stroke="var(--cloud-edge)" stroke-width="2.5" stroke-linejoin="round"/>
+  </g></g>`;
+const drops = (n, color, cls, h = 9) => Array.from({ length: n }, (_, i) => {
+  const x = 30 + i * (40 / Math.max(n - 1, 1));
+  return `<line class="${cls}" style="animation-delay:${(i * 0.37) % 1}s" x1="${x}" y1="76" x2="${x - 3}" y2="${76 + h}" stroke="${color}" stroke-width="4" stroke-linecap="round"/>`;
+}).join("");
+const flakes = n => Array.from({ length: n }, (_, i) =>
+  `<text class="flake" style="animation-delay:${i * 0.6}s" x="${28 + i * 12}" y="86" font-size="14" fill="var(--snow)">✻</text>`).join("");
+
+function icon(k) {
+  const body = {
+    clear: sun(),
+    mostly: sun(42, 40) + cloud(28, 22, .7),
+    partly: sun(38, 36) + cloud(14, 14, .85),
+    cloudy: cloud(-10, -2, .8, "var(--dark-cloud)", "drift2") + cloud(8, 6, .9),
+    fog: cloud(0, -10, .9) + [70, 80, 90].map((y, i) =>
+      `<line class="fogline" style="animation-delay:${i * .8}s" x1="${18 + i * 4}" y1="${y}" x2="${80 - i * 6}" y2="${y}" stroke="var(--fog)" stroke-width="5" stroke-linecap="round"/>`).join(""),
+    drizzle: sun(66, 30, 12) + cloud(0, -6, .9) + drops(3, "var(--rain)", "drop", 5),
+    rain: cloud(0, -8, .9, "var(--dark-cloud)") + drops(5, "var(--rain)", "drop"),
+    sleet: cloud(0, -8, .9, "var(--dark-cloud)") + drops(2, "var(--rain)", "drop") + flakes(2),
+    snow: cloud(0, -8, .9) + flakes(4),
+    storm: cloud(0, -8, .9, "var(--dark-cloud)") + drops(3, "var(--rain)", "drop") +
+      `<path class="bolt" d="M52 64 l-10 16 h9 l-5 14 l16-20 h-9 l6-10 z" fill="var(--bolt)" stroke="#b58900" stroke-width="1.5"/>`,
+  }[k];
+  return `<svg viewBox="0 0 100 100" aria-hidden="true">${body}</svg>`;
+}
+
+const toMin = t => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
+const fmt12 = t => { let [h, m] = t.split(":").map(Number); const ap = h < 12 ? "am" : "pm"; h = h % 12 || 12; return `${h}:${String(m).padStart(2, "0")}${ap}`; };
+const niceDate = d => new Date(d + "T12:00").toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+const shortDate = d => new Date(d + "T12:00").toLocaleDateString(undefined, { month: "short", day: "numeric" });
+
+function meter(emoji, label, pct, value, color) {
+  return `<div class="meter"><span>${emoji}</span><span>${label}</span>
+    <div class="bar"><div class="fill" style="width:${Math.max(0, Math.min(100, pct))}%;background:${color}"></div></div>
+    <span class="val">${value}</span></div>`;
+}
+
+function daylight(r) {
+  const rise = toMin(r.sunrise), set = toMin(r.sunset), len = set - rise;
+  // Sun position at log time (6:00 AM Central = 5:00 AM Mountain).
+  const logMin = r.city.includes("CO") ? 300 : 360;
+  const t = Math.max(0, Math.min(1, (logMin - rise) / len));
+  const x = 10 + t * 280, y = 62 - Math.sin(t * Math.PI) * 50;
+  return `<div class="daylight">
+    <svg viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M10 62 Q150 -38 290 62" fill="none" stroke="var(--line)" stroke-width="3" stroke-dasharray="6 6"/>
+      <line x1="0" y1="62" x2="300" y2="62" stroke="var(--line)" stroke-width="2"/>
+      <circle cx="${x}" cy="${y}" r="8" fill="var(--sun)"/>
+    </svg>
+    <div class="times"><span>🌅 ${fmt12(r.sunrise)}</span><span>${Math.floor(len / 60)}h ${len % 60}m of daylight</span><span>🌇 ${fmt12(r.sunset)}</span></div>
+  </div>`;
+}
+
+function renderCards(rows, cities) {
+  document.getElementById("cards").innerHTML = rows.map(r => {
+    const ci = cities.indexOf(r.city);
+    return `<article class="card" style="--accent:${CITY_COLORS[ci % 3]}">
+      <div class="top">
+        <div><h3>${r.city}</h3><p class="cond">${r.conditions}</p>
+          <div class="temp">${r.temp_f}°</div><div class="feels">feels like ${r.feels_like_f}°</div></div>
+        <div class="big-icon">${icon(kind(r.conditions))}</div>
+      </div>
+      <div class="hilo"><span class="hi">▲ ${r.high_f}°</span><span class="lo">▼ ${r.low_f}°</span></div>
+      <div class="meters">
+        ${meter("☔", "Rain", r.precip_chance_pct, r.precip_chance_pct + "%", "var(--rain)")}
+        ${meter("💧", "Humidity", r.humidity_pct, r.humidity_pct + "%", "var(--c1)")}
+        ${meter("💨", "Wind", r.max_wind_mph / 30 * 100, r.max_wind_mph + " mph", "var(--c2)")}
+      </div>
+      ${daylight(r)}
+    </article>`;
+  }).join("");
+}
+
+function renderChart(data, cities, dates) {
+  const W = 1000, H = 340, L = 40, R = 16, T = 12, B = 34;
+  const temps = data.flatMap(r => [r.high_f, r.low_f]);
+  const lo = Math.floor((Math.min(...temps) - 3) / 10) * 10, hi = Math.ceil((Math.max(...temps) + 3) / 10) * 10;
+  const x = i => L + (dates.length === 1 ? (W - L - R) / 2 : i * (W - L - R) / (dates.length - 1));
+  const y = v => T + (hi - v) / (hi - lo) * (H - T - B);
+  let svg = "";
+  for (let v = lo; v <= hi; v += 10)
+    svg += `<line class="grid" x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}"/><text x="${L - 8}" y="${y(v) + 4}" text-anchor="end">${v}°</text>`;
+  const every = Math.ceil(dates.length / 10);
+  dates.forEach((d, i) => { if (i % every === 0 || i === dates.length - 1) svg += `<text x="${x(i)}" y="${H - 10}" text-anchor="middle">${shortDate(d)}</text>`; });
+  cities.forEach((c, ci) => {
+    const col = CITY_COLORS[ci % 3];
+    const pts = dates.map((d, i) => [i, data.find(r => r.date === d && r.city === c)]).filter(p => p[1]);
+    const path = key => pts.map(([i, r], j) => `${j ? "L" : "M"}${x(i)} ${y(r[key])}`).join("");
+    const band = path("high_f") + pts.slice().reverse().map(([i, r]) => `L${x(i)} ${y(r.low_f)}`).join("") + "Z";
+    svg += `<path d="${band}" fill="${col}" opacity=".08"/>`;
+    svg += `<path d="${path("high_f")}" fill="none" stroke="${col}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>`;
+    svg += `<path d="${path("low_f")}" fill="none" stroke="${col}" stroke-width="2" stroke-dasharray="5 5" opacity=".7"/>`;
+    for (const [i, r] of pts) for (const key of ["high_f", "low_f"])
+      svg += `<circle class="dot" cx="${x(i)}" cy="${y(r[key])}" r="4" fill="${col}" stroke="var(--card)" stroke-width="2"
+        data-tip="${EMOJI[kind(r.conditions)]} ${c} · ${shortDate(r.date)} · ${key === "high_f" ? "high" : "low"} ${r[key]}°"/>`;
+  });
+  const chart = document.getElementById("chart");
+  chart.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  chart.innerHTML = svg;
+  document.getElementById("legend").innerHTML = cities.map((c, i) => `<span style="--k:${CITY_COLORS[i % 3]}">${c}</span>`).join("") +
+    `<span style="--k:var(--muted);opacity:.7">solid = high · dashed = low</span>`;
+  const tip = document.getElementById("tip");
+  chart.addEventListener("pointermove", e => {
+    const t = e.target.dataset?.tip;
+    tip.style.opacity = t ? 1 : 0;
+    if (t) { tip.textContent = t; tip.style.left = e.clientX + 12 + "px"; tip.style.top = e.clientY - 30 + "px"; }
+  });
+  chart.addEventListener("pointerleave", () => tip.style.opacity = 0);
+}
+
+function renderCalendar(data, cities, dates) {
+  const recent = dates.slice().reverse();
+  let html = `<table><thead><tr><th></th>${recent.map(d => `<th>${shortDate(d)}</th>`).join("")}</tr></thead><tbody>`;
+  for (const c of cities) {
+    html += `<tr><th class="city">${c}</th>`;
+    for (const d of recent) {
+      const r = data.find(r => r.date === d && r.city === c);
+      html += r ? `<td title="${r.conditions}, ${r.high_f}° / ${r.low_f}°">${icon(kind(r.conditions))}<small>${r.high_f}°/${r.low_f}°</small></td>` : "<td>·</td>";
+    }
+    html += "</tr>";
+  }
+  document.getElementById("calendar").innerHTML = html + "</tbody></table>";
+}
+
+function renderStats(data, dates) {
+  const hottest = data.reduce((a, b) => b.high_f > a.high_f ? b : a);
+  const coldest = data.reduce((a, b) => b.low_f < a.low_f ? b : a);
+  const wettest = data.reduce((a, b) => b.precip_chance_pct > a.precip_chance_pct ? b : a);
+  const windiest = data.reduce((a, b) => b.max_wind_mph > a.max_wind_mph ? b : a);
+  const city = r => r.city.split(",")[0];
+  document.getElementById("stats").innerHTML = [
+    `📅 <b>${dates.length}</b> days logged`,
+    `🔥 Hottest <b>${hottest.high_f}°</b> ${city(hottest)}, ${shortDate(hottest.date)}`,
+    `🥶 Coldest <b>${coldest.low_f}°</b> ${city(coldest)}, ${shortDate(coldest.date)}`,
+    `☔ Wettest <b>${wettest.precip_chance_pct}%</b> ${city(wettest)}, ${shortDate(wettest.date)}`,
+    `🌬️ Windiest <b>${windiest.max_wind_mph} mph</b> ${city(windiest)}, ${shortDate(windiest.date)}`,
+  ].map(s => `<span class="chip">${s}</span>`).join("");
+}
+
+fetch("weather.csv", { cache: "no-cache" })
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })
+  .then(text => {
+    const data = parseCSV(text);
+    const dates = [...new Set(data.map(r => r.date))].sort();
+    const cities = [...new Set(data.map(r => r.city))];
+    const latest = dates.at(-1);
+    document.getElementById("subtitle").textContent = `Morning weather, logged every day · last updated ${niceDate(latest)}`;
+    document.getElementById("today-title").textContent = `☀️ ${niceDate(latest)}`;
+    renderStats(data, dates);
+    renderCards(data.filter(r => r.date === latest), cities);
+    renderChart(data, cities, dates);
+    renderCalendar(data, cities, dates);
+  })
+  .catch(err => { document.getElementById("subtitle").textContent = "Couldn't load weather.csv 🌧️ (" + err.message + ")"; });
+</script>
+</body>
+</html>

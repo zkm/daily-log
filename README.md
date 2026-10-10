@@ -2,6 +2,8 @@
 
 Weather for Appleton, WI; Chicago, IL; and Denver, CO, logged automatically every morning at 6:00 AM Central from [Open-Meteo](https://open-meteo.com/).
 "Morning" is the reading at log time (5:00 AM in Denver); sunrise/sunset are local to each city.
+🌤️ **Live page: https://zkm.github.io/daily-log/**
+
 Raw data is in [`weather.csv`](weather.csv).
 
 | Date | City | Conditions | Morning | High / Low | Rain chance | Max wind | Humidity | Sunrise / Sunset |
