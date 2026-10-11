@@ -39,12 +39,14 @@ rows='
 if json=$(curl -sf --max-time 20 --retry 3 --retry-delay 10 "$url"); then
   args=(--arg today "$today" --argjson cities "$CITIES")
   jq -r "${args[@]}" "$rows | @csv" <<<"$json" >> weather.csv
+  # e.g. "Appleton 59°F, Chicago 58°F, Denver 59°F" for the commit message (IFTTT tweets it)
+  temps=$(jq -r "${args[@]}" "[$rows]"' | map("\(.[1] | split(",")[0]) \(.[3])°F") | join(", ")' <<<"$json")
   jq -r "${args[@]}" "$rows"' | "| \(.[0]) | \(.[1]) | \(.[2]) | \(.[3])°F (feels \(.[4])°) | \(.[5])° / \(.[6])° | \(.[7])% | \(.[8]) mph | \(.[9])% | \(.[10]) / \(.[11]) |"' <<<"$json" >> README.md
 else
   jq -r --arg today "$today" '.[] | "| \($today) | \(.name) | _weather unavailable_ | | | | | | |"' <<<"$CITIES" >> README.md
 fi
 
 git add README.md weather.csv
-git commit --quiet -m "Weather for $today"
+git commit --quiet -m "Weather for $today${temps:+: $temps}"
 git push --quiet
 echo "Pushed weather for $today."
