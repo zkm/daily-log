@@ -86,3 +86,6 @@ Raw data is in [`weather.csv`](weather.csv).
 | 2026-10-22 | Appleton, WI | Fog | 46°F (feels 43°) | 64° / 45° | 0% | 5 mph | 98% | 07:17 / 17:57 |
 | 2026-10-22 | Chicago, IL | Clear | 46°F (feels 42°) | 61° / 45° | 0% | 6 mph | 78% | 07:11 / 17:58 |
 | 2026-10-22 | Denver, CO | Overcast | 54°F (feels 51°) | 78° / 52° | 13% | 11 mph | 56% | 07:17 / 18:10 |
+| 2026-10-23 | Appleton, WI | Fog | 51°F (feels 50°) | 66° / 49° | 0% | 7 mph | 99% | 07:19 / 17:56 |
+| 2026-10-23 | Chicago, IL | Fog | 44°F (feels 41°) | 62° / 42° | 0% | 8 mph | 91% | 07:12 / 17:56 |
+| 2026-10-23 | Denver, CO | Overcast | 61°F (feels 52°) | 77° / 57° | 26% | 16 mph | 45% | 07:18 / 18:09 |
