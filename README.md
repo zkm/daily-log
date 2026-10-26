@@ -4,97 +4,28 @@ Weather for Appleton, WI; Chicago, IL; and Denver, CO, logged automatically ever
 "Morning" is the reading at log time (5:00 AM in Denver); sunrise/sunset are local to each city.
 🌤️ **Live page: https://zkm.github.io/daily-log/**
 
-Raw data is in [`weather.csv`](weather.csv).
+The table shows the last 7 days, newest first. The full history is in [`weather.csv`](weather.csv) and on the live page.
 
 | Date | City | Conditions | Morning | High / Low | Rain chance | Max wind | Humidity | Sunrise / Sunset |
 |------|------|------------|---------|------------|-------------|----------|----------|------------------|
-| 2026-09-27 | Appleton, WI | Fog | 63°F (feels 60°) | 70° / 44° | 2% | 4 mph | 53% | 06:46 / 18:41 |
-| 2026-09-27 | Chicago, IL | Overcast | 60°F (feels 57°) | 69° / 52° | 0% | 9 mph | 64% | 06:43 / 18:38 |
-| 2026-09-27 | Denver, CO | Light drizzle | 81°F (feels 70°) | 85° / 54° | 10% | 15 mph | 20% | 06:52 / 18:48 |
-| 2026-09-28 | Appleton, WI | Mostly clear | 54°F (feels 53°) | 74° / 53° | 1% | 5 mph | 91% | 06:48 / 18:39 |
-| 2026-09-28 | Chicago, IL | Partly cloudy | 50°F (feels 47°) | 68° / 49° | 1% | 7 mph | 89% | 06:44 / 18:37 |
-| 2026-09-28 | Denver, CO | Heavy drizzle | 59°F (feels 56°) | 79° / 57° | 26% | 15 mph | 56% | 06:53 / 18:46 |
-| 2026-09-29 | Appleton, WI | Overcast | 51°F (feels 48°) | 73° / 51° | 48% | 10 mph | 85% | 06:49 / 18:37 |
-| 2026-09-29 | Chicago, IL | Fog | 53°F (feels 53°) | 73° / 51° | 2% | 8 mph | 100% | 06:45 / 18:35 |
-| 2026-09-29 | Denver, CO | Overcast | 58°F (feels 56°) | 71° / 56° | 12% | 8 mph | 68% | 06:54 / 18:45 |
-| 2026-09-30 | Appleton, WI | Light rain | 61°F (feels 60°) | 69° / 61° | 70% | 10 mph | 84% | 06:50 / 18:36 |
-| 2026-09-30 | Chicago, IL | Rain | 61°F (feels 60°) | 66° / 60° | 99% | 10 mph | 78% | 06:46 / 18:33 |
-| 2026-09-30 | Denver, CO | Light drizzle | 53°F (feels 50°) | 71° / 52° | 21% | 16 mph | 69% | 06:55 / 18:43 |
-| 2026-10-01 | Appleton, WI | Light rain | 65°F (feels 67°) | 71° / 53° | 84% | 9 mph | 94% | 06:51 / 18:34 |
-| 2026-10-01 | Chicago, IL | Heavy rain | 63°F (feels 64°) | 74° / 62° | 93% | 13 mph | 92% | 06:47 / 18:31 |
-| 2026-10-01 | Denver, CO | Overcast | 51°F (feels 48°) | 72° / 50° | 8% | 9 mph | 74% | 06:56 / 18:42 |
-| 2026-10-02 | Appleton, WI | Overcast | 46°F (feels 40°) | 58° / 45° | 0% | 11 mph | 78% | 06:52 / 18:32 |
-| 2026-10-02 | Chicago, IL | Rain | 54°F (feels 50°) | 61° / 52° | 73% | 12 mph | 79% | 06:48 / 18:30 |
-| 2026-10-02 | Denver, CO | Clear | 49°F (feels 45°) | 84° / 46° | 0% | 11 mph | 73% | 06:57 / 18:40 |
-| 2026-10-03 | Appleton, WI | Light drizzle | 42°F (feels 37°) | 63° / 41° | 23% | 12 mph | 81% | 06:53 / 18:30 |
-| 2026-10-03 | Chicago, IL | Clear | 52°F (feels 47°) | 62° / 52° | 3% | 9 mph | 74% | 06:49 / 18:28 |
-| 2026-10-03 | Denver, CO | Clear | 50°F (feels 44°) | 84° / 49° | 3% | 11 mph | 53% | 06:58 / 18:38 |
-| 2026-10-04 | Appleton, WI | Light drizzle | 51°F (feels 47°) | 65° / 49° | 32% | 14 mph | 83% | 06:55 / 18:28 |
-| 2026-10-04 | Chicago, IL | Overcast | 50°F (feels 45°) | 67° / 50° | 9% | 9 mph | 82% | 06:50 / 18:26 |
-| 2026-10-04 | Denver, CO | Clear | 51°F (feels 47°) | 83° / 48° | 0% | 6 mph | 73% | 06:59 / 18:37 |
-| 2026-10-05 | Appleton, WI | Clear | 43°F (feels 38°) | 60° / 42° | 2% | 7 mph | 85% | 06:56 / 18:26 |
-| 2026-10-05 | Chicago, IL | Clear | 46°F (feels 41°) | 61° / 45° | 0% | 10 mph | 82% | 06:51 / 18:25 |
-| 2026-10-05 | Denver, CO | Overcast | 49°F (feels 44°) | 87° / 49° | 1% | 7 mph | 65% | 07:00 / 18:35 |
-| 2026-10-06 | Appleton, WI | Overcast | 54°F (feels 49°) | 69° / 51° | 12% | 17 mph | 84% | 06:57 / 18:25 |
-| 2026-10-06 | Chicago, IL | Clear | 48°F (feels 42°) | 70° / 46° | 4% | 12 mph | 76% | 06:53 / 18:23 |
-| 2026-10-06 | Denver, CO | Overcast | 53°F (feels 47°) | 87° / 53° | 2% | 7 mph | 40% | 07:01 / 18:34 |
-| 2026-10-07 | Appleton, WI | Mostly clear | 53°F (feels 50°) | 72° / 51° | 0% | 15 mph | 85% | 06:58 / 18:23 |
-| 2026-10-07 | Chicago, IL | Clear | 54°F (feels 48°) | 75° / 53° | 1% | 12 mph | 71% | 06:54 / 18:21 |
-| 2026-10-07 | Denver, CO | Overcast | 55°F (feels 49°) | 83° / 55° | 1% | 8 mph | 33% | 07:02 / 18:32 |
-| 2026-10-08 | Appleton, WI | Overcast | 45°F (feels 39°) | 65° / 44° | 1% | 13 mph | 69% | 07:00 / 18:21 |
-| 2026-10-08 | Chicago, IL | Clear | 50°F (feels 45°) | 67° / 49° | 3% | 8 mph | 74% | 06:55 / 18:20 |
-| 2026-10-08 | Denver, CO | Overcast | 52°F (feels 46°) | 84° / 51° | 1% | 10 mph | 40% | 07:03 / 18:31 |
-| 2026-10-09 | Appleton, WI | Overcast | 44°F (feels 39°) | 69° / 43° | 3% | 9 mph | 82% | 07:01 / 18:19 |
-| 2026-10-09 | Chicago, IL | Overcast | 50°F (feels 46°) | 67° / 50° | 21% | 7 mph | 78% | 06:56 / 18:18 |
-| 2026-10-09 | Denver, CO | Overcast | 53°F (feels 46°) | 87° / 51° | 2% | 13 mph | 38% | 07:04 / 18:29 |
-| 2026-10-10 | Appleton, WI | Clear | 59°F (feels 56°) | 79° / 57° | 5% | 14 mph | 78% | 07:02 / 18:18 |
-| 2026-10-10 | Chicago, IL | Overcast | 56°F (feels 51°) | 83° / 55° | 1% | 15 mph | 71% | 06:57 / 18:17 |
-| 2026-10-10 | Denver, CO | Overcast | 58°F (feels 51°) | 83° / 57° | 5% | 14 mph | 30% | 07:05 / 18:27 |
-| 2026-10-11 | Appleton, WI | Overcast | 59°F (feels 55°) | 77° / 58° | 0% | 13 mph | 70% | 07:03 / 18:16 |
-| 2026-10-11 | Chicago, IL | Partly cloudy | 58°F (feels 56°) | 71° / 57° | 0% | 8 mph | 87% | 06:58 / 18:15 |
-| 2026-10-11 | Denver, CO | Overcast | 59°F (feels 55°) | 86° / 58° | 3% | 15 mph | 40% | 07:06 / 18:26 |
-| 2026-10-12 | Appleton, WI | Overcast | 63°F (feels 61°) | 84° / 62° | 38% | 11 mph | 79% | 07:04 / 18:14 |
-| 2026-10-12 | Chicago, IL | Overcast | 59°F (feels 57°) | 85° / 59° | 7% | 14 mph | 80% | 06:59 / 18:13 |
-| 2026-10-12 | Denver, CO | Overcast | 62°F (feels 56°) | 81° / 59° | 1% | 18 mph | 37% | 07:07 / 18:24 |
-| 2026-10-13 | Appleton, WI | Overcast | 59°F (feels 58°) | 64° / 55° | 10% | 13 mph | 97% | 07:06 / 18:12 |
-| 2026-10-13 | Chicago, IL | Drizzle | 68°F (feels 67°) | 79° / 64° | 24% | 10 mph | 76% | 07:00 / 18:12 |
-| 2026-10-13 | Denver, CO | Heavy drizzle | 53°F (feels 49°) | 67° / 53° | 16% | 10 mph | 83% | 07:08 / 18:23 |
-| 2026-10-14 | Appleton, WI | Light drizzle | 54°F (feels 53°) | 59° / 51° | 22% | 9 mph | 91% | 07:07 / 18:11 |
-| 2026-10-14 | Chicago, IL | Light drizzle | 62°F (feels 62°) | 65° / 56° | 41% | 12 mph | 96% | 07:01 / 18:10 |
-| 2026-10-14 | Denver, CO | Light rain | 48°F (feels 44°) | 54° / 42° | 73% | 12 mph | 91% | 07:09 / 18:21 |
-| 2026-10-15 | Appleton, WI | Light rain | 53°F (feels 50°) | 56° / 52° | 99% | 9 mph | 89% | 07:08 / 18:09 |
-| 2026-10-15 | Chicago, IL | Heavy rain | 58°F (feels 55°) | 63° / 57° | 87% | 14 mph | 85% | 07:03 / 18:09 |
-| 2026-10-15 | Denver, CO | Light rain | 45°F (feels 39°) | 51° / 40° | 52% | 16 mph | 91% | 07:10 / 18:20 |
-| 2026-10-16 | Appleton, WI | Heavy drizzle | 49°F (feels 44°) | 51° / 35° | 64% | 18 mph | 92% | 07:10 / 18:07 |
-| 2026-10-16 | Chicago, IL | Light rain | 51°F (feels 45°) | 58° / 41° | 47% | 20 mph | 85% | 07:04 / 18:07 |
-| 2026-10-16 | Denver, CO | Overcast | 35°F (feels 28°) | 59° / 32° | 0% | 7 mph | 56% | 07:11 / 18:18 |
-| 2026-10-17 | Appleton, WI | Clear | 32°F (feels 26°) | 50° / 32° | 0% | 13 mph | 87% | 07:11 / 18:06 |
-| 2026-10-17 | Chicago, IL | Overcast | 38°F (feels 30°) | 53° / 37° | 2% | 14 mph | 78% | 07:05 / 18:05 |
-| 2026-10-17 | Denver, CO | Clear | 35°F (feels 28°) | 77° / 34° | 0% | 6 mph | 63% | 07:12 / 18:17 |
-| 2026-10-18 | Appleton, WI | Clear | 41°F (feels 32°) | 59° / 41° | 0% | 16 mph | 69% | 07:12 / 18:04 |
-| 2026-10-18 | Chicago, IL | Clear | 38°F (feels 31°) | 60° / 37° | 0% | 12 mph | 77% | 07:06 / 18:04 |
-| 2026-10-18 | Denver, CO | Overcast | 42°F (feels 34°) | 75° / 42° | 2% | 8 mph | 42% | 07:13 / 18:16 |
-| 2026-10-19 | Appleton, WI | Overcast | 44°F (feels 39°) | 62° / 44° | 0% | 8 mph | 84% | 07:13 / 18:02 |
-| 2026-10-19 | Chicago, IL | Overcast | 41°F (feels 35°) | 60° / 40° | 0% | 6 mph | 82% | 07:07 / 18:02 |
-| 2026-10-19 | Denver, CO | Overcast | 44°F (feels 39°) | 73° / 41° | 1% | 10 mph | 61% | 07:14 / 18:14 |
-| 2026-10-20 | Appleton, WI | Fog | 41°F (feels 38°) | 58° / 41° | 0% | 6 mph | 98% | 07:15 / 18:01 |
-| 2026-10-20 | Chicago, IL | Fog | 42°F (feels 38°) | 60° / 40° | 0% | 7 mph | 91% | 07:08 / 18:01 |
-| 2026-10-20 | Denver, CO | Overcast | 44°F (feels 40°) | 72° / 43° | 1% | 6 mph | 70% | 07:15 / 18:13 |
-| 2026-10-21 | Appleton, WI | Overcast | 43°F (feels 39°) | 64° / 43° | 1% | 7 mph | 95% | 07:16 / 17:59 |
-| 2026-10-21 | Chicago, IL | Overcast | 42°F (feels 39°) | 63° / 42° | 2% | 6 mph | 95% | 07:10 / 17:59 |
-| 2026-10-21 | Denver, CO | Overcast | 45°F (feels 40°) | 76° / 45° | 2% | 6 mph | 62% | 07:16 / 18:11 |
-| 2026-10-22 | Appleton, WI | Fog | 46°F (feels 43°) | 64° / 45° | 0% | 5 mph | 98% | 07:17 / 17:57 |
-| 2026-10-22 | Chicago, IL | Clear | 46°F (feels 42°) | 61° / 45° | 0% | 6 mph | 78% | 07:11 / 17:58 |
-| 2026-10-22 | Denver, CO | Overcast | 54°F (feels 51°) | 78° / 52° | 13% | 11 mph | 56% | 07:17 / 18:10 |
-| 2026-10-23 | Appleton, WI | Fog | 51°F (feels 50°) | 66° / 49° | 0% | 7 mph | 99% | 07:19 / 17:56 |
-| 2026-10-23 | Chicago, IL | Fog | 44°F (feels 41°) | 62° / 42° | 0% | 8 mph | 91% | 07:12 / 17:56 |
-| 2026-10-23 | Denver, CO | Overcast | 61°F (feels 52°) | 77° / 57° | 26% | 16 mph | 45% | 07:18 / 18:09 |
-| 2026-10-24 | Appleton, WI | Overcast | 49°F (feels 45°) | 67° / 47° | 5% | 11 mph | 88% | 07:20 / 17:54 |
-| 2026-10-24 | Chicago, IL | Overcast | 49°F (feels 45°) | 64° / 49° | 3% | 9 mph | 83% | 07:13 / 17:55 |
-| 2026-10-24 | Denver, CO | Heavy drizzle | 53°F (feels 46°) | 58° / 42° | 55% | 10 mph | 41% | 07:19 / 18:07 |
-| 2026-10-25 | Appleton, WI | Overcast | 55°F (feels 51°) | 69° / 53° | 10% | 10 mph | 80% | 07:21 / 17:53 |
-| 2026-10-25 | Chicago, IL | Overcast | 48°F (feels 43°) | 69° / 47° | 2% | 7 mph | 80% | 07:14 / 17:53 |
-| 2026-10-25 | Denver, CO | Overcast | 40°F (feels 36°) | 59° / 38° | 17% | 9 mph | 89% | 07:21 / 18:06 |
 | 2026-10-26 | Appleton, WI | Overcast | 49°F (feels 45°) | 52° / 44° | 11% | 10 mph | 76% | 07:22 / 17:51 |
 | 2026-10-26 | Chicago, IL | Overcast | 52°F (feels 49°) | 60° / 49° | 4% | 12 mph | 89% | 07:15 / 17:52 |
 | 2026-10-26 | Denver, CO | Rain | 44°F (feels 40°) | 53° / 40° | 64% | 11 mph | 94% | 07:22 / 18:05 |
+| 2026-10-25 | Appleton, WI | Overcast | 55°F (feels 51°) | 69° / 53° | 10% | 10 mph | 80% | 07:21 / 17:53 |
+| 2026-10-25 | Chicago, IL | Overcast | 48°F (feels 43°) | 69° / 47° | 2% | 7 mph | 80% | 07:14 / 17:53 |
+| 2026-10-25 | Denver, CO | Overcast | 40°F (feels 36°) | 59° / 38° | 17% | 9 mph | 89% | 07:21 / 18:06 |
+| 2026-10-24 | Appleton, WI | Overcast | 49°F (feels 45°) | 67° / 47° | 5% | 11 mph | 88% | 07:20 / 17:54 |
+| 2026-10-24 | Chicago, IL | Overcast | 49°F (feels 45°) | 64° / 49° | 3% | 9 mph | 83% | 07:13 / 17:55 |
+| 2026-10-24 | Denver, CO | Heavy drizzle | 53°F (feels 46°) | 58° / 42° | 55% | 10 mph | 41% | 07:19 / 18:07 |
+| 2026-10-23 | Appleton, WI | Fog | 51°F (feels 50°) | 66° / 49° | 0% | 7 mph | 99% | 07:19 / 17:56 |
+| 2026-10-23 | Chicago, IL | Fog | 44°F (feels 41°) | 62° / 42° | 0% | 8 mph | 91% | 07:12 / 17:56 |
+| 2026-10-23 | Denver, CO | Overcast | 61°F (feels 52°) | 77° / 57° | 26% | 16 mph | 45% | 07:18 / 18:09 |
+| 2026-10-22 | Appleton, WI | Fog | 46°F (feels 43°) | 64° / 45° | 0% | 5 mph | 98% | 07:17 / 17:57 |
+| 2026-10-22 | Chicago, IL | Clear | 46°F (feels 42°) | 61° / 45° | 0% | 6 mph | 78% | 07:11 / 17:58 |
+| 2026-10-22 | Denver, CO | Overcast | 54°F (feels 51°) | 78° / 52° | 13% | 11 mph | 56% | 07:17 / 18:10 |
+| 2026-10-21 | Appleton, WI | Overcast | 43°F (feels 39°) | 64° / 43° | 1% | 7 mph | 95% | 07:16 / 17:59 |
+| 2026-10-21 | Chicago, IL | Overcast | 42°F (feels 39°) | 63° / 42° | 2% | 6 mph | 95% | 07:10 / 17:59 |
+| 2026-10-21 | Denver, CO | Overcast | 45°F (feels 40°) | 76° / 45° | 2% | 6 mph | 62% | 07:16 / 18:11 |
+| 2026-10-20 | Appleton, WI | Fog | 41°F (feels 38°) | 58° / 41° | 0% | 6 mph | 98% | 07:15 / 18:01 |
+| 2026-10-20 | Chicago, IL | Fog | 42°F (feels 38°) | 60° / 40° | 0% | 7 mph | 91% | 07:08 / 18:01 |
+| 2026-10-20 | Denver, CO | Overcast | 44°F (feels 40°) | 72° / 43° | 1% | 6 mph | 70% | 07:15 / 18:13 |
