@@ -46,6 +46,13 @@ else
   jq -r --arg today "$today" '.[] | "| \($today) | \(.name) | _weather unavailable_ | | | | | | |"' <<<"$CITIES" >> README.md
 fi
 
+# Keep the README short: the newest 7 days, newest first. The full history is in
+# weather.csv and on the live page. The table is the last thing in README.md, so
+# every line that isn't a data row (intro, table header) stays in place, in order.
+keep=$(( 7 * $(jq length <<<"$CITIES") ))
+{ grep -vE '^\| [0-9]{4}-' README.md; grep -E '^\| [0-9]{4}-' README.md | sort -s -t'|' -k2,2r | head -n "$keep"; } > README.md.tmp
+mv README.md.tmp README.md
+
 git add README.md weather.csv
 git commit --quiet -m "Weather for $today${temps:+: $temps}"
 git push --quiet
