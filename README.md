@@ -8,6 +8,9 @@ The table shows the last 7 days, newest first. The full history is in [`weather.
 
 | Date | City | Conditions | Morning | High / Low | Rain chance | Max wind | Humidity | Sunrise / Sunset |
 |------|------|------------|---------|------------|-------------|----------|----------|------------------|
+| 2026-10-27 | Appleton, WI | Overcast | 43°F (feels 37°) | 60° / 43° | 9% | 10 mph | 91% | 07:24 / 17:50 |
+| 2026-10-27 | Chicago, IL | Overcast | 54°F (feels 51°) | 68° / 53° | 4% | 10 mph | 90% | 07:17 / 17:51 |
+| 2026-10-27 | Denver, CO | Fog | 42°F (feels 40°) | 63° / 40° | 0% | 8 mph | 99% | 07:23 / 18:03 |
 | 2026-10-26 | Appleton, WI | Overcast | 49°F (feels 45°) | 52° / 44° | 11% | 10 mph | 76% | 07:22 / 17:51 |
 | 2026-10-26 | Chicago, IL | Overcast | 52°F (feels 49°) | 60° / 49° | 4% | 12 mph | 89% | 07:15 / 17:52 |
 | 2026-10-26 | Denver, CO | Rain | 44°F (feels 40°) | 53° / 40° | 64% | 11 mph | 94% | 07:22 / 18:05 |
@@ -26,6 +29,3 @@ The table shows the last 7 days, newest first. The full history is in [`weather.
 | 2026-10-21 | Appleton, WI | Overcast | 43°F (feels 39°) | 64° / 43° | 1% | 7 mph | 95% | 07:16 / 17:59 |
 | 2026-10-21 | Chicago, IL | Overcast | 42°F (feels 39°) | 63° / 42° | 2% | 6 mph | 95% | 07:10 / 17:59 |
 | 2026-10-21 | Denver, CO | Overcast | 45°F (feels 40°) | 76° / 45° | 2% | 6 mph | 62% | 07:16 / 18:11 |
-| 2026-10-20 | Appleton, WI | Fog | 41°F (feels 38°) | 58° / 41° | 0% | 6 mph | 98% | 07:15 / 18:01 |
-| 2026-10-20 | Chicago, IL | Fog | 42°F (feels 38°) | 60° / 40° | 0% | 7 mph | 91% | 07:08 / 18:01 |
-| 2026-10-20 | Denver, CO | Overcast | 44°F (feels 40°) | 72° / 43° | 1% | 6 mph | 70% | 07:15 / 18:13 |
