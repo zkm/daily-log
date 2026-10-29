@@ -1,5 +1,13 @@
 # daily-log
 
+[![Deploy weather page](https://github.com/zkm/daily-log/actions/workflows/pages.yml/badge.svg)](https://github.com/zkm/daily-log/actions/workflows/pages.yml)
+[![Backup](https://github.com/zkm/daily-log/actions/workflows/backup.yml/badge.svg)](https://github.com/zkm/daily-log/actions/workflows/backup.yml)
+[![live page](https://img.shields.io/website?url=https%3A%2F%2Fzkm.github.io%2Fdaily-log%2F&label=live%20page)](https://zkm.github.io/daily-log/)
+
+![Bash](https://img.shields.io/badge/Bash-4EAA25?logo=gnubash&logoColor=white)
+![jq](https://img.shields.io/badge/jq-5A5A5A)
+![Data: Open-Meteo](https://img.shields.io/badge/data-Open--Meteo-0F7EC2)
+
 Weather for Appleton, WI; Chicago, IL; and Denver, CO, logged automatically every morning at 6:00 AM Central from [Open-Meteo](https://open-meteo.com/).
 "Morning" is the reading at log time (5:00 AM in Denver); sunrise/sunset are local to each city.
 🌤️ **Live page: https://zkm.github.io/daily-log/**
