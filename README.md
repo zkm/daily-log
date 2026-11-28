@@ -16,6 +16,9 @@ The table shows the last 7 days, newest first. The full history is in [`weather.
 
 | Date | City | Conditions | Morning | High / Low | Rain chance | Max wind | Humidity | Sunrise / Sunset |
 |------|------|------------|---------|------------|-------------|----------|----------|------------------|
+| 2026-11-28 | Appleton, WI | Overcast | 36°F (feels 29°) | 51° / 31° | 23% | 10 mph | 74% | 07:05 / 16:17 |
+| 2026-11-28 | Chicago, IL | Overcast | 33°F (feels 26°) | 49° / 33° | 5% | 12 mph | 81% | 06:55 / 16:21 |
+| 2026-11-28 | Denver, CO | Light drizzle | 45°F (feels 38°) | 60° / 32° | 23% | 24 mph | 45% | 06:58 / 16:36 |
 | 2026-11-27 | Appleton, WI | Overcast | 33°F (feels 24°) | 46° / 30° | 4% | 13 mph | 67% | 07:04 / 16:17 |
 | 2026-11-27 | Chicago, IL | Light rain | 41°F (feels 32°) | 42° / 33° | 96% | 23 mph | 90% | 06:54 / 16:21 |
 | 2026-11-27 | Denver, CO | Overcast | 43°F (feels 34°) | 62° / 37° | 1% | 16 mph | 35% | 06:57 / 16:37 |
@@ -34,6 +37,3 @@ The table shows the last 7 days, newest first. The full history is in [`weather.
 | 2026-11-22 | Appleton, WI | Drizzle | 53°F (feels 50°) | 56° / 31° | 91% | 16 mph | 78% | 06:58 / 16:20 |
 | 2026-11-22 | Chicago, IL | Light rain | 50°F (feels 45°) | 56° / 32° | 73% | 14 mph | 77% | 06:48 / 16:24 |
 | 2026-11-22 | Denver, CO | Overcast | 23°F (feels 16°) | 41° / 23° | 0% | 8 mph | 75% | 06:52 / 16:39 |
-| 2026-11-21 | Appleton, WI | Overcast | 53°F (feels 44°) | 66° / 52° | 4% | 15 mph | 57% | 06:57 / 16:21 |
-| 2026-11-21 | Chicago, IL | Partly cloudy | 46°F (feels 40°) | 68° / 45° | 2% | 11 mph | 78% | 06:47 / 16:25 |
-| 2026-11-21 | Denver, CO | Snow | 39°F (feels 33°) | 42° / 25° | 13% | 8 mph | 47% | 06:51 / 16:40 |
